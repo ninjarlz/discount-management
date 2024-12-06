@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/discount-management
+    username: postgres
+    password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
+          issuer-uri: http://127.0.0.1:8080
+
+dev-mode:
+  mock-auth-enabled: true
+  mock-auth-token-timeout: 3600
+  mock-auth-user-id: 1
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    discount-management: DEBUG

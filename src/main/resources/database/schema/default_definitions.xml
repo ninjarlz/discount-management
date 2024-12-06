@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <!-- String definitions -->
+    <property name="STRING_TINY" value="VARCHAR(64)"  dbms="postgresql"/>
+    <property name="STRING_SMALL" value="VARCHAR(256)"  dbms="postgresql"/>
+    <property name="STRING_MEDIUM" value="VARCHAR(512)"  dbms="postgresql"/>
+    <property name="STRING_BIG" value="VARCHAR(1024)"  dbms="postgresql"/>
+    <property name="STRING_HUGE" value="VARCHAR(16768)"  dbms="postgresql"/>
+    <property name="CLOB" value="text" dbms="postgresql"/>
+    <property name="BLOB" value="oid" dbms="postgresql"/>
+    <property name="BINARY_RAW" value="BYTEA" dbms="postgresql"/>
+
+    <!-- Date Time -->
+    <property name="DATE" value="TIMESTAMP" dbms="postgresql"/>
+
+    <!-- Functions -->
+    <property name="SYSTEM_DATETIME" value="CURRENT_TIMESTAMP" dbms="postgresql"/>
+
+</databaseChangeLog>
