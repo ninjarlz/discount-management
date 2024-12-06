@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+  web:
+    container_name: discount-management
+    build: .
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:16.4
+    container_name: db-discount-management
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      PGUSER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: discount-management
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10

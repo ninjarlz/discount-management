@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: discount-management
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: none
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        format_sql: true
+  liquibase:
+    change-log: classpath:database/schema/master.xml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTHORIZATION_SERVER_URL}
+          jwk-set-uri: ${AUTHORIZATION_SERVER_URL}/oauth2/jwks
+
+logging:
+  level:
+    root: INFO
+    discount-management: ${LOG_LEVEL}
