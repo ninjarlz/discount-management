@@ -1,0 +1,41 @@
+package pl.tul.discountmanagement.model.entity.currency;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import pl.tul.discountmanagement.model.entity.product.ProductEntity;
+
+import java.util.Set;
+import java.util.UUID;
+
+import static pl.tul.discountmanagement.model.entity.product.ProductEntity.CURRENCY;
+
+/**
+ * The Entity class for the Currency item.
+ */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity(name = "currency")
+public class CurrencyEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    @Column(nullable = false, unique = true)
+    private String currencyCode;
+    @OneToMany(mappedBy = CURRENCY)
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<ProductEntity> products;
+}

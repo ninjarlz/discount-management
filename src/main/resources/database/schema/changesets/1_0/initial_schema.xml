@@ -4,6 +4,83 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet author="Michal Kusmidrowicz" id="initial-schema">
 
+    <!--currency table-->
+    <createTable tableName="currency">
+        <column name="id" type="uuid">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="currency_code" type="${STRING_SMALL}">
+            <constraints nullable="false" unique="true"/>
+        </column>
+    </createTable>
+
+    <!--percentage based discount table-->
+    <createTable tableName="percentage_based_discount">
+        <column name="id" type="uuid">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="percentage_rate" type="int">
+            <constraints nullable="false" unique="true"/>
+        </column>
+    </createTable>
+    <sql><![CDATA[ALTER TABLE percentage_based_discount ADD CONSTRAINT percentage_rate_range CHECK (percentage_rate >= 0 AND percentage_rate <= 100)]]></sql>
+
+    <!--product table-->
+    <createTable tableName="product">
+        <column name="id" type="uuid">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="name" type="${STRING_BIG}"/>
+        <column name="description" type="${STRING_HUGE}"/>
+        <column name="currency_id" type="uuid">
+           <constraints nullable="false" foreignKeyName="fk_product_currency" references="currency(id)"/>
+        </column>
+        <column name="percentage_based_discount_id" type="uuid">
+            <constraints foreignKeyName="fk_product_percentage_based_discount" references="percentage_based_discount(id)"/>
+        </column>
+        <column name="price" type="decimal">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+
+    <!--quantity_based_discount table-->
+    <createTable tableName="quantity_based_discount">
+        <column name="id" type="uuid">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="percentage_rate" type="int">
+            <constraints nullable="false"/>
+        </column>
+        <column name="lower_threshold" type="int">
+            <constraints nullable="false"/>
+        </column>
+        <column name="upper_threshold" type="int"/>
+    </createTable>
+    <addUniqueConstraint
+            tableName="quantity_based_discount"
+            constraintName="unique_lower_threshold_upper_threshold_percentage_rate"
+            columnNames="lower_threshold, upper_threshold, percentage_rate"
+    />
+    <sql><![CDATA[ALTER TABLE quantity_based_discount ADD CONSTRAINT percentage_rate_range CHECK (percentage_rate >= 0 AND percentage_rate <= 100)]]></sql>
+    <sql><![CDATA[ALTER TABLE quantity_based_discount ADD CONSTRAINT lower_upper_threshold_values CHECK (upper_threshold IS NULL OR (lower_threshold < upper_threshold))]]></sql>
+
+    <!--product_quantity_based_discount table-->
+    <createTable tableName="product_quantity_based_discount">
+        <column name="product_id" type="uuid">
+            <constraints nullable="false" foreignKeyName="fk_product" references="product(id)"/>
+        </column>
+        <column name="quantity_based_discount_id" type="uuid">
+            <constraints nullable="false" foreignKeyName="fk_percentage_based_discount" references="quantity_based_discount(id)"/>
+        </column>
+    </createTable>
+    <addPrimaryKey
+            columnNames="product_id, quantity_based_discount_id"
+            constraintName="pk_product_quantity_based_discount"
+            tableName="product_quantity_based_discount"
+    />
+
+</changeSet>
 
 </databaseChangeLog>
