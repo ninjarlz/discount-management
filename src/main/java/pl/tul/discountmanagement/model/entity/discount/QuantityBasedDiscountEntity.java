@@ -34,12 +34,15 @@ import static pl.tul.discountmanagement.model.entity.product.ProductEntity.QUANT
 ))
 @Check(constraints = "upper_threshold IS NULL OR (lower_threshold < upper_threshold)")
 public class QuantityBasedDiscountEntity {
+
+    public static final String PERCENTAGE_RATE = "percentageRate";
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
-    private int lowerThreshold;
-    private int upperThreshold;
+    private int lowerItemsThreshold;
+    private Integer upperItemsThreshold;
     @Column(nullable = false)
     @Range(min = 0, max = 100)
     private int percentageRate;
