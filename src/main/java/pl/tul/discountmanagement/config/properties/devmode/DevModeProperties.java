@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.UUID;
+
 import static pl.tul.discountmanagement.config.properties.devmode.DevModeProperties.DEV_MODE_PREFIX;
 
 @Getter
@@ -17,6 +19,6 @@ public class DevModeProperties {
     public static final String MOCK_AUTH_ENABLED_PROPERTY = "mock-auth-enabled";
 
     private boolean mockAuthEnabled = false;
-    private long mockAuthUserId = 1L;
+    private UUID mockAuthUserId = UUID.fromString("11111111-1111-1111-1111-111111111111");
     private long mockAuthTokenTimeout = 60L;
 }

@@ -10,6 +10,7 @@ import pl.tul.discountmanagement.model.dto.security.UserDetailsDTO;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -35,7 +36,7 @@ public class AuthenticationDelegate {
      *
      * @return current userId
      */
-    public long getUserId() throws AuthenticationException {
+    public UUID getUserId() throws AuthenticationException {
         return getUserDetails().userId();
     }
 

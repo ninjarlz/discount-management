@@ -53,18 +53,18 @@
         <column name="percentage_rate" type="int">
             <constraints nullable="false"/>
         </column>
-        <column name="lower_threshold" type="int">
+        <column name="lower_items_threshold" type="int">
             <constraints nullable="false"/>
         </column>
-        <column name="upper_threshold" type="int"/>
+        <column name="upper_items_threshold" type="int"/>
     </createTable>
     <addUniqueConstraint
             tableName="quantity_based_discount"
-            constraintName="unique_lower_threshold_upper_threshold_percentage_rate"
-            columnNames="lower_threshold, upper_threshold, percentage_rate"
+            constraintName="unique_lower_items_threshold_upper_items_threshold_percentage_rate"
+            columnNames="lower_items_threshold, upper_items_threshold, percentage_rate"
     />
     <sql><![CDATA[ALTER TABLE quantity_based_discount ADD CONSTRAINT percentage_rate_range CHECK (percentage_rate >= 0 AND percentage_rate <= 100)]]></sql>
-    <sql><![CDATA[ALTER TABLE quantity_based_discount ADD CONSTRAINT lower_upper_threshold_values CHECK (upper_threshold IS NULL OR (lower_threshold < upper_threshold))]]></sql>
+    <sql><![CDATA[ALTER TABLE quantity_based_discount ADD CONSTRAINT lower_upper_threshold_values CHECK (upper_items_threshold IS NULL OR (lower_items_threshold < upper_items_threshold))]]></sql>
 
     <!--product_quantity_based_discount table-->
     <createTable tableName="product_quantity_based_discount">

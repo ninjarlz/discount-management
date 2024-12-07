@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +24,11 @@ import pl.tul.discountmanagement.model.entity.discount.PercentageBasedDiscountEn
 import pl.tul.discountmanagement.model.entity.discount.QuantityBasedDiscountEntity;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import static pl.tul.discountmanagement.model.entity.discount.QuantityBasedDiscountEntity.PERCENTAGE_RATE;
 
 /**
  * The Entity class for the Product item.
@@ -60,6 +64,6 @@ public class ProductEntity {
             joinColumns = { @JoinColumn(name = "product_id") },
             inverseJoinColumns = { @JoinColumn(name = "quantity_based_discount_id") }
     )
-    @Fetch(FetchMode.SUBSELECT)
-    private Set<QuantityBasedDiscountEntity> quantityBasedDiscounts;
+    @OrderBy(PERCENTAGE_RATE)
+    private Set<QuantityBasedDiscountEntity> quantityBasedDiscounts = new LinkedHashSet<>();
 }

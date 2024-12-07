@@ -13,6 +13,7 @@ import pl.tul.discountmanagement.model.dto.security.UserDetailsDTO;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptySet;
@@ -31,6 +32,7 @@ public class AuthenticationTokenConverter implements Converter<Jwt, Authenticati
     private static final String USERNAME_CLAIM = "username";
     private static final String EMAIL_CLAIM = "email";
     private static final String USER_ID_CLAIM_IS_EMPTY = "User id claim is empty";
+    private static final String USER_ID_CLAIM_IMPROPER_FORMAT = "User id claim has improper format";
 
     /**
      * Converts the source Jwt object to the {@link AuthenticationTokenDTO}. Permissions and user details are extracted
@@ -64,15 +66,22 @@ public class AuthenticationTokenConverter implements Converter<Jwt, Authenticati
 
     private UserDetailsDTO extractUserDetails(Jwt jwt) {
         log.debug("JWT token conversion - extracting user claims");
-        Long userId = (Long) jwt.getClaims().get(USER_ID_CLAIM);
+        String userId = (String) jwt.getClaims().get(USER_ID_CLAIM);
         String username = (String) jwt.getClaims().get(USERNAME_CLAIM);
         String email = (String) jwt.getClaims().get(EMAIL_CLAIM);
         if (isNull(userId)) {
             log.error(USER_ID_CLAIM_IS_EMPTY);
             throw new InvalidBearerTokenException(USER_ID_CLAIM_IS_EMPTY);
         }
+        UUID paredUserId;
+        try {
+            paredUserId = UUID.fromString(userId);
+        } catch (IllegalArgumentException e) {
+            log.error(USER_ID_CLAIM_IMPROPER_FORMAT);
+            throw new InvalidBearerTokenException(USER_ID_CLAIM_IMPROPER_FORMAT);
+        }
         return UserDetailsDTO.builder()
-                .userId(userId)
+                .userId(paredUserId)
                 .email(email)
                 .username(username)
                 .build();

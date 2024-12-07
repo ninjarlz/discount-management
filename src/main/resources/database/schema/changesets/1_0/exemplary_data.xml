@@ -23,13 +23,13 @@
         </insert>
         <insert tableName="quantity_based_discount">
             <column name="id" value="8c5477af-2ddf-4b7d-a200-980da9a58be4"/>
-            <column name="lower_threshold" value="3"/>
-            <column name="upper_threshold" value="5"/>
+            <column name="lower_items_threshold" value="3"/>
+            <column name="upper_items_threshold" value="5"/>
             <column name="percentage_rate" value="10"/>
         </insert>
         <insert tableName="quantity_based_discount">
             <column name="id" value="cd2291fd-d325-485f-a9e1-0b75e267df97"/>
-            <column name="lower_threshold" value="6"/>
+            <column name="lower_items_threshold" value="6"/>
             <column name="percentage_rate" value="15"/>
         </insert>
         <insert tableName="product_quantity_based_discount">
