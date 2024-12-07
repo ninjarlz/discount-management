@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet author="Michal Kusmidrowicz" id="exemplary_data">
+        <insert tableName="currency">
+           <column name="id" value="6eb4fac9-0122-4a87-999f-24a1c9de4a75"/>
+           <column name="currency_code" value="EUR"/>
+        </insert>
+        <insert tableName="percentage_based_discount">
+            <column name="id" value="fa4c4092-d7f2-4807-a8e3-cbb716b0b220"/>
+            <column name="percentage_rate" value="20"/>
+        </insert>
+        <insert tableName="product">
+            <column name="id" value="e6d606c1-70b3-4c92-9345-fc7a926f1c64"/>
+            <column name="name" value="Samsung Galaxy S24"/>
+            <column name="description" value="A really nice phone."/>
+            <column name="price" value="1000"/>
+            <column name="currency_id" value="6eb4fac9-0122-4a87-999f-24a1c9de4a75"/>
+            <column name="percentage_based_discount_id" value="fa4c4092-d7f2-4807-a8e3-cbb716b0b220"/>
+        </insert>
+        <insert tableName="quantity_based_discount">
+            <column name="id" value="8c5477af-2ddf-4b7d-a200-980da9a58be4"/>
+            <column name="lower_threshold" value="3"/>
+            <column name="upper_threshold" value="5"/>
+            <column name="percentage_rate" value="10"/>
+        </insert>
+        <insert tableName="quantity_based_discount">
+            <column name="id" value="cd2291fd-d325-485f-a9e1-0b75e267df97"/>
+            <column name="lower_threshold" value="6"/>
+            <column name="percentage_rate" value="15"/>
+        </insert>
+        <insert tableName="product_quantity_based_discount">
+            <column name="product_id" value="e6d606c1-70b3-4c92-9345-fc7a926f1c64"/>
+            <column name="quantity_based_discount_id" value="8c5477af-2ddf-4b7d-a200-980da9a58be4"/>
+        </insert>
+        <insert tableName="product_quantity_based_discount">
+            <column name="product_id" value="e6d606c1-70b3-4c92-9345-fc7a926f1c64"/>
+            <column name="quantity_based_discount_id" value="cd2291fd-d325-485f-a9e1-0b75e267df97"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

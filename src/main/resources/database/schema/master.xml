@@ -9,6 +9,7 @@
 
     <!-- 1.0 -->
     <include file="changesets/1_0/initial_schema.xml" relativeToChangelogFile="true" />
+    <include file="changesets/1_0/exemplary_data.xml" relativeToChangelogFile="true" />
 
     <!-- please put 1.x changes here and remove this line -->
 
