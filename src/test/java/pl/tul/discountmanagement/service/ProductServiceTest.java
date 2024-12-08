@@ -37,6 +37,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static pl.tul.discountmanagement.util.TestDataUtils.buildCurrencyEntity;
+import static pl.tul.discountmanagement.util.TestDataUtils.buildPercentageBasedDiscountEntity;
+import static pl.tul.discountmanagement.util.TestDataUtils.buildProductEntity;
+import static pl.tul.discountmanagement.util.TestDataUtils.buildQuantityBasedDiscountEntity;
 
 /**
  * Test class for {@link ProductService}
@@ -430,45 +434,6 @@ class ProductServiceTest {
         // When & Then
         assertThrows(IllegalArgumentException.class, () -> productService.calculateProductPrice(productId, productQuantity));
         assertTrue(memoryAppender.contains(PRODUCT_QUANTITY_ERROR_MSG, Level.ERROR));
-    }
-
-    private CurrencyEntity buildCurrencyEntity(String currencyCode, int fractionDigits) {
-        return CurrencyEntity.builder()
-                .id(UUID.randomUUID())
-                .currencyCode(currencyCode)
-                .fractionDigits(fractionDigits)
-                .build();
-    }
-
-    private PercentageBasedDiscountEntity buildPercentageBasedDiscountEntity(int percentageRate) {
-        return PercentageBasedDiscountEntity.builder()
-                .id(UUID.randomUUID())
-                .percentageRate(percentageRate)
-                .build();
-    }
-
-    private QuantityBasedDiscountEntity buildQuantityBasedDiscountEntity(int percentageRate, int lowerItemThreshold,
-                                                                         @Nullable Integer upperItemThreshold) {
-        return QuantityBasedDiscountEntity.builder()
-                .id(UUID.randomUUID())
-                .percentageRate(percentageRate)
-                .lowerItemsThreshold(lowerItemThreshold)
-                .upperItemsThreshold(upperItemThreshold)
-                .build();
-    }
-
-    private ProductEntity buildProductEntity(UUID productId, BigDecimal productPrice, CurrencyEntity currency,
-                                             @Nullable PercentageBasedDiscountEntity percentageBasedDiscount,
-                                             Set<QuantityBasedDiscountEntity> quantityBasedDiscounts) {
-        return ProductEntity.builder()
-                .id(productId)
-                .name("NAME")
-                .description("DESCRIPTION")
-                .price(productPrice)
-                .currency(currency)
-                .percentageBasedDiscount(percentageBasedDiscount)
-                .quantityBasedDiscounts(quantityBasedDiscounts)
-                .build();
     }
 
 }

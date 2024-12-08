@@ -4,6 +4,7 @@ import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.tul.discountmanagement.exception.product.ProductNotFoundException;
 import pl.tul.discountmanagement.mapper.product.ProductMapper;
 import pl.tul.discountmanagement.model.dto.product.ProductDTO;
@@ -38,11 +39,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
+    @Transactional(readOnly = true)
     public ProductDTO getProductById(UUID productId) throws ProductNotFoundException {
         ProductEntity productEntity = getProductEntityById(productId);
         return productMapper.entityToDTO(productEntity);
     }
 
+    @Transactional(readOnly = true)
     public ProductPriceDTO calculateProductPrice(UUID productId, int productQuantity) throws ProductNotFoundException {
         if (productQuantity < 1) {
             log.error(PRODUCT_QUANTITY_ERROR_MSG);
