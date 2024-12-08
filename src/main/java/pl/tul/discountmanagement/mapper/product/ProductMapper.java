@@ -27,7 +27,7 @@ public abstract class ProductMapper {
 
     private final DiscountMapper discountMapper = Mappers.getMapper(DiscountMapper.class);
 
-    public ProductDTO entityToDto(ProductEntity productEntity) {
+    public ProductDTO entityToDTO(ProductEntity productEntity) {
         CurrencyEntity currencyEntity = productEntity.getCurrency();
         return ProductDTO.builder()
                 .id(productEntity.getId())
