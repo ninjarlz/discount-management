@@ -8,6 +8,7 @@
         <insert tableName="currency">
            <column name="id" value="6eb4fac9-0122-4a87-999f-24a1c9de4a75"/>
            <column name="currency_code" value="EUR"/>
+           <column name="fraction_digits" value="2"/>
         </insert>
         <insert tableName="percentage_based_discount">
             <column name="id" value="fa4c4092-d7f2-4807-a8e3-cbb716b0b220"/>
@@ -17,7 +18,7 @@
             <column name="id" value="e6d606c1-70b3-4c92-9345-fc7a926f1c64"/>
             <column name="name" value="Samsung Galaxy S24"/>
             <column name="description" value="A really nice phone."/>
-            <column name="price" value="1000"/>
+            <column name="price" value="1000.00"/>
             <column name="currency_id" value="6eb4fac9-0122-4a87-999f-24a1c9de4a75"/>
             <column name="percentage_based_discount_id" value="fa4c4092-d7f2-4807-a8e3-cbb716b0b220"/>
         </insert>

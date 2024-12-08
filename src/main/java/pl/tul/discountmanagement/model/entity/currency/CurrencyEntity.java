@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import pl.tul.discountmanagement.model.entity.product.ProductEntity;
 
+import java.util.Currency;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,8 +35,14 @@ public class CurrencyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(nullable = false, unique = true)
     private String currencyCode;
+
+    @Column(nullable = false)
+    @Min(1)
+    private int fractionDigits;
+
     @OneToMany(mappedBy = CURRENCY)
     @Fetch(FetchMode.SUBSELECT)
     private Set<ProductEntity> products;

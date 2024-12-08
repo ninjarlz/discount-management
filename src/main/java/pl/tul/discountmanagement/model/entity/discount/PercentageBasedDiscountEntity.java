@@ -30,9 +30,11 @@ public class PercentageBasedDiscountEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(nullable = false, unique = true)
     @Range(min = 0, max = 100)
     private int percentageRate;
+
     @OneToMany(mappedBy = PERCENTAGE_BASED_DISCOUNT)
     private Set<ProductEntity> products;
 }

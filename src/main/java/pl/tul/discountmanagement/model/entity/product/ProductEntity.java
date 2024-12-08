@@ -1,5 +1,6 @@
 package pl.tul.discountmanagement.model.entity.product;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,16 +49,25 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Nullable
     private String name;
+
+    @Nullable
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false)
     private CurrencyEntity currency;
+
     @Column(nullable = false)
     private BigDecimal price;
+
     @ManyToOne
     @JoinColumn(name = "percentage_based_discount_id")
+    @Nullable
     private PercentageBasedDiscountEntity percentageBasedDiscount;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_quantity_based_discount",

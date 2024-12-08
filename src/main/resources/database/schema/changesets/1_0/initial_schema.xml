@@ -14,7 +14,11 @@
         <column name="currency_code" type="${STRING_SMALL}">
             <constraints nullable="false" unique="true"/>
         </column>
+        <column name="fraction_digits" type="int">
+            <constraints nullable="false"/>
+        </column>
     </createTable>
+    <sql><![CDATA[ALTER TABLE currency ADD CONSTRAINT fraction_digits_check CHECK (fraction_digits >= 1)]]></sql>
 
     <!--percentage based discount table-->
     <createTable tableName="percentage_based_discount">
