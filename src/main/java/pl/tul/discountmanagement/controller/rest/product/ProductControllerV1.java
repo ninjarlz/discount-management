@@ -1,6 +1,8 @@
 package pl.tul.discountmanagement.controller.rest.product;
 
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,23 +11,28 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import pl.tul.discountmanagement.exception.product.ProductNotFoundException;
 import pl.tul.discountmanagement.mapper.product.ProductMapper;
 import pl.tul.discountmanagement.model.dto.product.ProductDTO;
+import pl.tul.discountmanagement.model.dto.product.ProductPriceDTO;
+import pl.tul.discountmanagement.model.response.rest.product.ProductPriceResponseV1;
 import pl.tul.discountmanagement.model.response.rest.product.ProductResponseV1;
-import pl.tul.discountmanagement.service.service.ProductService;
+import pl.tul.discountmanagement.service.ProductService;
 
 import java.util.UUID;
 
 import static pl.tul.discountmanagement.util.constant.rest.ApiUrls.PRODUCT_ENDPOINT_V1;
+import static pl.tul.discountmanagement.util.constant.security.Permissions.READ_PRICE_PERMISSION_EXPRESSION;
 import static pl.tul.discountmanagement.util.constant.security.Permissions.READ_PRODUCT_PERMISSION_EXPRESSION;
 
 @RestController
 @RequestMapping(PRODUCT_ENDPOINT_V1)
 @RequiredArgsConstructor
 @Validated
+@Log4j2
 public class ProductControllerV1 {
 
     private final ProductService productService;
@@ -38,6 +45,19 @@ public class ProductControllerV1 {
             ProductDTO productDTO = productService.getProductById(productId);
             return ResponseEntity.ok(productMapper.DTOtoResponseV1(productDTO));
         } catch (ProductNotFoundException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
+        }
+    }
+
+    @GetMapping(value = "/{productId}/price", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize(READ_PRICE_PERMISSION_EXPRESSION)
+    public ResponseEntity<ProductPriceResponseV1> calculatePrice(@PathVariable("productId") UUID productId, @RequestParam(value = "productQuantity") @Min(1) int productQuantity) {
+        try {
+            ProductPriceDTO productPriceDTO = productService.calculateProductPrice(productId, productQuantity);
+            return ResponseEntity.ok(productMapper.priceDTOtoPriceResponseV1(productPriceDTO));
+        } catch (ProductNotFoundException e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }

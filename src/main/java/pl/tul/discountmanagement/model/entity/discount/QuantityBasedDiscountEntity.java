@@ -1,5 +1,6 @@
 package pl.tul.discountmanagement.model.entity.discount;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,12 +41,17 @@ public class QuantityBasedDiscountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(nullable = false)
     private int lowerItemsThreshold;
+
+    @Nullable
     private Integer upperItemsThreshold;
+
     @Column(nullable = false)
     @Range(min = 0, max = 100)
     private int percentageRate;
+
     @ManyToMany(mappedBy = QUANTITY_BASED_DISCOUNTS)
     private Set<ProductEntity> products;
 }

@@ -3,7 +3,6 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
 
-ARG profile
 FROM eclipse-temurin:17
 ENV TZ="Europe/Warsaw"
 EXPOSE 8080
