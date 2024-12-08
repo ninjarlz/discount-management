@@ -75,5 +75,6 @@ public class ProductEntity {
             inverseJoinColumns = { @JoinColumn(name = "quantity_based_discount_id") }
     )
     @OrderBy(PERCENTAGE_RATE)
+    @Builder.Default
     private Set<QuantityBasedDiscountEntity> quantityBasedDiscounts = new LinkedHashSet<>();
 }

@@ -2,7 +2,7 @@ package pl.tul.discountmanagement.controller.rest.product;
 
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ import static pl.tul.discountmanagement.util.constant.security.Permissions.READ_
 @RequestMapping(PRODUCT_ENDPOINT_V1)
 @RequiredArgsConstructor
 @Validated
-@Log4j2
+@Slf4j
 public class ProductControllerV1 {
 
     private final ProductService productService;
