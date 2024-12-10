@@ -152,7 +152,7 @@ To calculate the price, one has to access the following endpoint:
 
 ![price.png](readme_img/price.png)
 
-The endpoint requires a valid JWT token with `READ_PRICE` scope - check [here](#authentication) how to get token.
+The endpoint requires a valid JWT token with `READ_PRICE` scope - check [here](#authentication) how to get the token.
 
 API behaviour:
 * Product identifier in the URL must have the form of UUID (the `400` response is returned for invalid identifiers).
