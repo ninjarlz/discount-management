@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * The DTO class for quantity based discount data.
+ * The DTO class for quantity-based discount data.
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * The response model representing quantity based discount data.
+ * The response model representing quantity-based discount data.
  * API V1
  */
 @EqualsAndHashCode(callSuper = true)

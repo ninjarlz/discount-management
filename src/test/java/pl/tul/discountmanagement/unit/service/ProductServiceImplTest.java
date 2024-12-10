@@ -42,7 +42,7 @@ import static pl.tul.discountmanagement.unit.util.TestDataUtils.buildCurrencyEnt
 import static pl.tul.discountmanagement.unit.util.TestDataUtils.buildPercentageBasedDiscountEntity;
 import static pl.tul.discountmanagement.unit.util.TestDataUtils.buildProductEntity;
 import static pl.tul.discountmanagement.unit.util.TestDataUtils.buildQuantityBasedDiscountEntity;
-import static pl.tul.discountmanagement.util.constant.TestConstants.DISCOUNTS_SUM_MORE_THAN_100_PERCENT_LOG_MSG;
+import static pl.tul.discountmanagement.util.constant.TestConstants.DISCOUNTS_SUM_EQUALS_TO_OR_MORE_THAN_100_PERCENT_LOG_MSG;
 import static pl.tul.discountmanagement.util.constant.TestConstants.MATCHING_PERCENTAGE_BASED_DISCOUNT_LOG_MSG;
 import static pl.tul.discountmanagement.util.constant.TestConstants.MATCHING_QUANTITY_BASED_DISCOUNT_LOG_MSG;
 import static pl.tul.discountmanagement.util.constant.TestConstants.PRODUCT_FOUND_LOG_MSG;
@@ -130,8 +130,8 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#getProductById(UUID)}
-     *                        returns {@link ProductDTO} with proper data and without percentage based discount when
-     *                        there is no associated percentage based discount.
+     *                        returns {@link ProductDTO} with proper data and without percentage-based discount when
+     *                        there is no associated percentage-based discount.
      * Test data            - product id and product price.
      * Test expected result - An instance of {@link ProductDTO} with proper data is returned.
      * Test type            - Positive.
@@ -170,8 +170,8 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#getProductById(UUID)}
-     *                        returns {@link ProductDTO} with proper data and without any quantity based discount when
-     *                        there are no associated percentage based discounts.
+     *                        returns {@link ProductDTO} with proper data and without any quantity-based discount when
+     *                        there are no associated quantity-based discounts.
      * Test data            - product id and product price.
      * Test expected result - An instance of {@link ProductDTO} with proper data is returned.
      * Test type            - Positive.
@@ -344,8 +344,8 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#calculateProductPrice(UUID, int)}
-     *                        returns {@link ProductPriceDTO} with proper data and only percentage
-     *                        based discount applied when product quantity is not high enough.
+     *                        returns {@link ProductPriceDTO} with proper data and only percentage-based discount applied
+     *                        when product quantity is not high enough.
      * Test data            - product id, product price and product quantity.
      * Test expected result - An instance of {@link ProductPriceDTO} with proper data is returned.
      * Test type            - Positive.
@@ -386,8 +386,8 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#calculateProductPrice(UUID, int)}
-     *                        returns {@link ProductPriceDTO} with proper data and only quantity
-     *                        based discount applied when there is no associated percentage based discount.
+     *                        returns {@link ProductPriceDTO} with proper data and only quantity-based discount applied
+     *                        when there is no associated percentage-based discount.
      * Test data            - product id, product price and product quantity.
      * Test expected result - An instance of {@link ProductPriceDTO} with proper data is returned.
      * Test type            - Positive.
@@ -428,7 +428,7 @@ class ProductServiceImplTest {
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#calculateProductPrice(UUID, int)}
      *                        returns {@link ProductPriceDTO} with proper data and not any discount applied when there
-     *                        is no associated percentage based discount and product quantity is not high enough.
+     *                        is no associated percentage-based discount and product quantity is not high enough.
      * Test data            - product id, product price and product quantity.
      * Test expected result - An instance of {@link ProductPriceDTO} with proper data is returned.
      * Test type            - Positive.
@@ -501,7 +501,7 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#calculateProductPrice(UUID, int)}
-     *                        returns {@link ProductPriceDTO} with proper data and quantity based discount with
+     *                        returns {@link ProductPriceDTO} with proper data and quantity-based discount with
      *                        higher percentage rate applied.
      * Test data            - product id, product price and product quantity.
      * Test expected result - An instance of {@link ProductPriceDTO} with proper data is returned.
@@ -592,8 +592,8 @@ class ProductServiceImplTest {
 
     /**
      * Test purpose         - Verify if {@link ProductServiceImpl#calculateProductPrice(UUID, int)}
-     *                        returns {@link ProductPriceDTO} with proper data and quantity based discount with
-     *                        higher percentage rate applied when two quantity based discounts' thresholds overlap.
+     *                        returns {@link ProductPriceDTO} with proper data and quantity-based discount with
+     *                        higher percentage rate applied when two quantity-based discounts' thresholds overlap.
      * Test data            - product id, product price and product quantity.
      * Test expected result - An instance of {@link ProductPriceDTO} with proper data is returned.
      * Test type            - Positive.
@@ -662,11 +662,6 @@ class ProductServiceImplTest {
 
         // When
         ProductPriceDTO productPriceDTO = productService.calculateProductPrice(productId, productQuantity);
-        assertTrue(memoryAppender.contains(PRODUCT_FOUND_LOG_MSG.formatted(productId), Level.INFO));
-        assertTrue(memoryAppender.contains(MATCHING_PERCENTAGE_BASED_DISCOUNT_LOG_MSG.formatted(productId, 90), Level.INFO));
-        assertTrue(memoryAppender.contains(MATCHING_QUANTITY_BASED_DISCOUNT_LOG_MSG.formatted(productId, 15), Level.INFO));
-        assertTrue(memoryAppender.contains(DISCOUNTS_SUM_MORE_THAN_100_PERCENT_LOG_MSG, Level.INFO));
-        assertTrue(memoryAppender.contains(PRODUCT_PRICE_CALCULATED_LOG_MSG.formatted(productId, productQuantity, "0.00 EUR", "0.00 EUR"), Level.INFO));
 
         // Then
         assertNotNull(productPriceDTO);
@@ -679,6 +674,11 @@ class ProductServiceImplTest {
         assertEquals("0.00", productPriceDTO.getTotalPrice().toString());
         verify(productMapper).entityToPriceDTO(eq(productEntity), eq(percentageBasedDiscountEntity),
                 eq(quantityBasedDiscountEntityToBeApplied), eq(productQuantity), any(), any());
+        assertTrue(memoryAppender.contains(PRODUCT_FOUND_LOG_MSG.formatted(productId), Level.INFO));
+        assertTrue(memoryAppender.contains(MATCHING_PERCENTAGE_BASED_DISCOUNT_LOG_MSG.formatted(productId, 90), Level.INFO));
+        assertTrue(memoryAppender.contains(MATCHING_QUANTITY_BASED_DISCOUNT_LOG_MSG.formatted(productId, 15), Level.INFO));
+        assertTrue(memoryAppender.contains(DISCOUNTS_SUM_EQUALS_TO_OR_MORE_THAN_100_PERCENT_LOG_MSG, Level.INFO));
+        assertTrue(memoryAppender.contains(PRODUCT_PRICE_CALCULATED_LOG_MSG.formatted(productId, productQuantity, "0.00 EUR", "0.00 EUR"), Level.INFO));
     }
 
     /**

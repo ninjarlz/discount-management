@@ -13,7 +13,7 @@ public final class TestConstants {
     public static final String PRODUCT_QUANTITY_ERROR_LOG_MSG = "Product quantity must be greater than 0.";
     public static final String MATCHING_PERCENTAGE_BASED_DISCOUNT_LOG_MSG = "Found matching percentage based discount for product with id '%s' with rate of '%d'%%.";
     public static final String MATCHING_QUANTITY_BASED_DISCOUNT_LOG_MSG = "Found matching quantity based discount for product with id '%s' with rate of '%d'%%.";
-    public static final String DISCOUNTS_SUM_MORE_THAN_100_PERCENT_LOG_MSG = "Product discounts sum to more than 100%, returning price of zero.";
+    public static final String DISCOUNTS_SUM_EQUALS_TO_OR_MORE_THAN_100_PERCENT_LOG_MSG = "Product discounts sum to equals to or more than 100%, returning price of zero.";
 
     // INTEGRATION TEST DATA IDS
     public static final UUID PRODUCT_ID = UUID.fromString("80280a99-7426-4e8d-9706-0387e754d790");

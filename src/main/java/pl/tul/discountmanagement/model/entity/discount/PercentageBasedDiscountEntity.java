@@ -21,7 +21,7 @@ import java.util.UUID;
 import static pl.tul.discountmanagement.model.entity.product.ProductEntity.PERCENTAGE_BASED_DISCOUNT;
 
 /**
- * The Entity class for the percentage based income item.
+ * The Entity class for the percentage-based discount item.
  */
 @Getter
 @Setter
