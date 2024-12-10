@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO class for storing access token response fetched from mocked Authorization Server in a dev mode
+ * DTO class for storing access token response fetched from mocked Authorization Server in a dev-mode.
  */
 @Builder
 @AllArgsConstructor

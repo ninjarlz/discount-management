@@ -1,4 +1,4 @@
-package pl.tul.discountmanagement.util;
+package pl.tul.discountmanagement.unit.util;
 
 import jakarta.annotation.Nullable;
 import pl.tul.discountmanagement.model.entity.currency.CurrencyEntity;
@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Util class exposing methods for building test data.
+ */
 public class TestDataUtils {
 
     public static CurrencyEntity buildCurrencyEntity(String currencyCode, int fractionDigits) {

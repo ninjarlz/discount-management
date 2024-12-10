@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * The DTO class for product data.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

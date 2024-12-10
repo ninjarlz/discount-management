@@ -5,6 +5,9 @@ import org.zalando.logbook.Correlation;
 import org.zalando.logbook.HttpLogWriter;
 import org.zalando.logbook.Precorrelation;
 
+/**
+ * Implementation of Logbook {@link HttpLogWriter}.
+ */
 @Slf4j
 public class LogbookWriter implements HttpLogWriter {
 

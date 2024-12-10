@@ -46,17 +46,15 @@ public class AuthenticationTokenConverter implements Converter<Jwt, Authenticati
     public AuthenticationTokenDTO convert(Jwt jwt) {
         Set<SimpleGrantedAuthority> permissionAuthorities = extractPermissionAuthorities(jwt);
         UserDetailsDTO userDetailsDTO = extractUserDetails(jwt);
-        var authenticationTokenDTO = new AuthenticationTokenDTO(permissionAuthorities, jwt, userDetailsDTO);
+        AuthenticationTokenDTO authenticationTokenDTO = new AuthenticationTokenDTO(permissionAuthorities, jwt, userDetailsDTO);
         authenticationTokenDTO.setAuthenticated(true);
         return authenticationTokenDTO;
     }
 
     private Set<SimpleGrantedAuthority> extractPermissionAuthorities(Jwt jwt) {
         log.debug("JWT token conversion - extracting permission claims");
-
         @SuppressWarnings("unchecked")
         Collection<String> permissions = (Collection<String>) jwt.getClaims().get(SCOPES_CLAIM);
-
         return Optional.ofNullable(permissions)
                 .orElse(emptySet())
                 .stream()

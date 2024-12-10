@@ -1,4 +1,4 @@
-package pl.tul.discountmanagement.logging;
+package pl.tul.discountmanagement.unit.logging;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * A custom appender that keeps logs in memory. Inherits from logback {@link AppenderBase}
+ * A custom appender that keeps logs in memory. Inherits from Logback {@link AppenderBase}.
  */
 public class MemoryAppender extends AppenderBase<ILoggingEvent> {
 

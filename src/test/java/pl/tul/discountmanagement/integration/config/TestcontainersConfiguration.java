@@ -1,4 +1,4 @@
-package pl.tul.discountmanagement.api.config;
+package pl.tul.discountmanagement.integration.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -9,6 +9,10 @@ import org.testcontainers.utility.DockerImageName;
 
 import static pl.tul.discountmanagement.util.constant.config.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
 
+/**
+ * Configuration class for containerized instance of PostgreSQL database.
+ * Meant to be used in integration test scenarios.
+ */
 @TestConfiguration(proxyBeanMethods = false)
 @Profile(INTEGRATION_TEST_PROFILE)
 class TestcontainersConfiguration {

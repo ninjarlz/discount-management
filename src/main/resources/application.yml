@@ -17,6 +17,7 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:database/schema/master.xml
+    contexts: main
   security:
     oauth2:
       resourceserver:

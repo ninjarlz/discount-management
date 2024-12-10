@@ -12,7 +12,7 @@ spring:
 
 dev-mode:
   mock-auth-enabled: true
-  mock-auth-token-timeout: 3600
+  mock-auth-token-timeout-in-seconds: 3600
   mock-auth-user-id: 11111111-1111-1111-1111-111111111111
 
 logging:

@@ -4,6 +4,14 @@ spring:
     url: jdbc:tc:postgresql:16.4:///integration-test-db
     username: postgres
     password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
+          issuer-uri: http://127.0.0.1:8080
+  liquibase:
+    contexts: main,integration-test
 
 logging:
   level:

@@ -18,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * The class of {@link ControllerAdvice} responsible for validation exceptions.
+ */
 @ControllerAdvice
 public class ValidationExceptionHandler {
 
@@ -31,6 +34,12 @@ public class ValidationExceptionHandler {
     private static final String FIELD_MESSAGE_DELIMITER = " - ";
     private static final String ERROR_DELIMITER = "; ";
 
+    /**
+     * Handler for {@link MethodArgumentNotValidException}.
+     *
+     * @param ex {@link MethodArgumentNotValidException}
+     * @return bad request error code with appropriate message.
+     */
     @ExceptionHandler
     public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         StringBuilder errorMessage = new StringBuilder();
@@ -44,6 +53,12 @@ public class ValidationExceptionHandler {
         return ResponseEntity.badRequest().body(buildBodyWithBadRequestData(errorMessage));
     }
 
+    /**
+     * Handler for {@link ConstraintViolationException}.
+     *
+     * @param ex {@link ConstraintViolationException}
+     * @return bad request error code with appropriate message.
+     */
     @ExceptionHandler
     public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex) {
         StringBuilder errorMessage = new StringBuilder();

@@ -10,6 +10,10 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * The response model representing product data.
+ * API V1
+ */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

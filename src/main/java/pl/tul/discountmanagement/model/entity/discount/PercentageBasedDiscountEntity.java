@@ -1,5 +1,6 @@
 package pl.tul.discountmanagement.model.entity.discount;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,9 @@ import java.util.UUID;
 
 import static pl.tul.discountmanagement.model.entity.product.ProductEntity.PERCENTAGE_BASED_DISCOUNT;
 
+/**
+ * The Entity class for the percentage based income item.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,5 +40,6 @@ public class PercentageBasedDiscountEntity  {
     private int percentageRate;
 
     @OneToMany(mappedBy = PERCENTAGE_BASED_DISCOUNT)
+    @Nullable
     private Set<ProductEntity> products;
 }

@@ -20,8 +20,12 @@ import java.math.RoundingMode;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
+/**
+ * Class responsible for mapping instances containing product data.
+ */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = DiscountMapper.class)
 public abstract class ProductMapper {
 
@@ -40,7 +44,8 @@ public abstract class ProductMapper {
     }
 
     public ProductPriceDTO entityToPriceDTO(ProductEntity productEntity, @Nullable PercentageBasedDiscountEntity appliedPercentageBasedDiscountEntity,
-                                            @Nullable QuantityBasedDiscountEntity appliedQuantityBasedDiscountEntity, int productQuantity, BigDecimal itemPrice) {
+                                            @Nullable QuantityBasedDiscountEntity appliedQuantityBasedDiscountEntity,
+                                            int productQuantity, BigDecimal totalPrice, BigDecimal itemPrice) {
         Set<PercentageBasedDiscountDTO> appliedDiscounts = new LinkedHashSet<>();
         if (nonNull(appliedPercentageBasedDiscountEntity)) {
             appliedDiscounts.add(discountMapper.percentageBasedDiscountEntityToDTO(appliedPercentageBasedDiscountEntity));
@@ -52,7 +57,7 @@ public abstract class ProductMapper {
         return ProductPriceDTO.builder()
                 .productId(productEntity.getId())
                 .productQuantity(productQuantity)
-                .totalPrice(itemPrice.multiply(new BigDecimal(productQuantity)).setScale(currencyEntity.getFractionDigits(), RoundingMode.HALF_UP))
+                .totalPrice(totalPrice.setScale(currencyEntity.getFractionDigits(), RoundingMode.HALF_UP))
                 .itemPrice(itemPrice.setScale(currencyEntity.getFractionDigits(), RoundingMode.HALF_UP))
                 .baseItemPrice(productEntity.getPrice().setScale(currencyEntity.getFractionDigits(), RoundingMode.HALF_UP))
                 .currency(currencyEntity.getCurrencyCode())
@@ -65,8 +70,14 @@ public abstract class ProductMapper {
     public abstract ProductPriceResponseV1 priceDTOtoPriceResponseV1(ProductPriceDTO productPriceDTO);
 
     private Set<PercentageBasedDiscountDTO> mapDiscountEntities(ProductEntity productEntity) {
-        PercentageBasedDiscountDTO percentageBasedDiscountDTO = discountMapper.percentageBasedDiscountEntityToDTO(productEntity.getPercentageBasedDiscount());
-        Set<PercentageBasedDiscountDTO> discounts = new LinkedHashSet<>(Set.of(percentageBasedDiscountDTO));
+        Set<PercentageBasedDiscountDTO> discounts = new LinkedHashSet<>();
+        if (nonNull(productEntity.getPercentageBasedDiscount())) {
+            PercentageBasedDiscountDTO percentageBasedDiscountDTO = discountMapper.percentageBasedDiscountEntityToDTO(productEntity.getPercentageBasedDiscount());
+            discounts.add(percentageBasedDiscountDTO);
+        }
+        if (isNull(productEntity.getQuantityBasedDiscounts())) {
+            return discounts;
+        }
         productEntity.getQuantityBasedDiscounts()
                 .stream()
                 .map(discountMapper::quantityBasedDiscountEntityToDTO)
