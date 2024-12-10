@@ -31,16 +31,16 @@ $ ./gradlew build
 
 ### Running application
 
-One can build & run application using provided [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml) files.
-Docker compose file contains definition of the containerized instance of PostgreSQL database.
-To run application in `dev` profile containing configuration for communication with containerized database, one has to 
-execute the following command (please, make sure that there is available Docker daemon instance running on your local
+One can build & run application using the provided [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml) files.
+Docker compose file contains a definition of the containerized instance of the PostgreSQL database.
+To run the application in the `dev` profile containing configuration for communication with the containerized database, one has to 
+execute the following command (please, make sure that there is an available Docker daemon instance running on your local
 machine):
 ```
 $ ./docker compose up
 ```
 
-To rebuild application image, once something was modified, one can use the following set of commands:
+To rebuild an application image, once something was modified, one can use the following set of commands:
 ```
 $ ./docker compose down
 $ ./docker compose build web
@@ -49,7 +49,7 @@ $ ./docker compose up
 
 ### Authentication
 
-To access any of application endpoint, one has to fetch JWT authorization token and attach it to the request using
+To access any of the application endpoints, one has to fetch the JWT authorization token and attach it to the request using
 `Authorization` header with `Bearer <token_value>` value.
 
 Application in `dev` profile (that can be run via [docker-compose.yml](docker-compose.yml) file) exposes mock authorization server
@@ -59,10 +59,10 @@ with the following endpoint:
 
 ![auth.png](readme_img/auth.png)
 
-The given endpoint does not require any kind of body nor other type of credentials and returns token with all
+The given endpoint does not require any kind of body or other type of credentials and returns a token with all
 permissions required by the application API.
 
-Decoded token payload has the following structure:
+The decoded token payload has the following structure:
 
 ```
 {
@@ -76,19 +76,19 @@ Decoded token payload has the following structure:
 }
 ```
 
-Configuration provided in `dev` profile makes the token valid for an hour, however, the set of authorization keys is
+The configuration provided in the `dev` profile makes the token valid for an hour, however, the set of authorization keys is
 generated during application startup, so please note that tokens cannot be reused across different runs of the application.
-Behaviour of mock authorization server can be adjusted via properties described [in this section](#authentication-1).
+The behaviour of the mock authorization server can be adjusted via properties described [in this section](#authentication-1).
 
 ### Running tests
 
-To run set of provided unit test scenarios, one has to execute the following command:
+To run a set of provided unit test scenarios, one has to execute the following command:
 ```
 $ ./gradlew test
 ```
 
-To run set of provided integration test scenarios using Spring `MockMvc` and Testcontainers instance of PostgreSQL database,
-one has to execute the following command (please, make sure that there is available Docker daemon instance running on your
+To run a set of provided integration test scenarios using Spring `MockMvc` and Testcontainers instance of PostgreSQL database,
+one has to execute the following command (please, make sure that there is an available Docker daemon instance running on your
 local machine):
 ```
 $ ./gradlew integrationTest
@@ -111,7 +111,7 @@ Otherwise, the given changelog will be not executed on the database, resulting i
 ### Authentication
 
 Contains configuration for `dev` profile that exposes mocked OAuth2 JWT token endpoints. 
-The behaviour of mocked authorization server can be configured via the following set of properties: 
+The behaviour of the mocked authorization server can be configured via the following set of properties: 
 ```
 dev-mode:
   mock-auth-enabled: true
@@ -123,7 +123,7 @@ dev-mode:
 
 ### Getting product details
 
-Return product details for a given product identifier. Product identifier in the URL has the form of UUID.
+Return product details for a given product identifier. The product identifier in the URL has the form of UUID.
 
 To fetch the product details, one has to access the following endpoint:
 
@@ -131,19 +131,19 @@ To fetch the product details, one has to access the following endpoint:
 
 ![product.png](readme_img/product.png)
 
-The endpoint requires valid JWT token with `READ_PRODUCT` scope - check [here](#authentication) how to get token.
+The endpoint requires a valid JWT token with `READ_PRODUCT` scope - check [here](#authentication) how to get the token.
 
 API behaviour:
-* Product identifier in the URL must have the form of UUID (`400` response is returned for invalid identifiers).
-* When there is no product with the given identifier, `404` response is returned.
+* Product identifier in the URL must have the form of UUID (the `400` response is returned for invalid identifiers).
+* When there is no product with the given identifier, the `404` response is returned.
 
 ### Calculating product price
 
-Calculates a price for given product identifier and product quantity. Applies all associated percentage based 
-discounts and quantity based discounts. Product can be assigned to only one percentage based discount and multiple 
-quantity based discounts. Price can be decreased by applying one percentage based discount and one quantity 
-based discount. In case both types of discounts are assigned to the given product and quantity, their rates are summed up.
-In case of multiple associated quantity based discounts with overlapping quantity thresholds, the one with higher discount rate 
+Calculates a price for a given product identifier and product quantity. Applies all associated percentage-based 
+discounts and quantity-based discounts. A product can be assigned to only one percentage-based discount and multiple 
+quantity-based discounts. Price can be decreased by applying one percentage-based discount and one quantity-based discount. 
+In case both types of discounts are assigned to the given product and quantity, their rates are summed up.
+In case of multiple associated quantity-based discounts with overlapping quantity thresholds, the one with a higher discount rate 
 is applied.
 
 To calculate the price, one has to access the following endpoint:
@@ -152,12 +152,12 @@ To calculate the price, one has to access the following endpoint:
 
 ![price.png](readme_img/price.png)
 
-The endpoint requires valid JWT token with `READ_PRICE` scope - check [here](#authentication) how to get token.
+The endpoint requires a valid JWT token with `READ_PRICE` scope - check [here](#authentication) how to get token.
 
 API behaviour:
-* Product identifier in the URL must have the form of UUID (`400` response is returned for invalid identifiers).
-* When there is no product with the given identifier, `404` response is returned.
-* Product quantity cannot be less than 1, otherwise `400` response is returned.
+* Product identifier in the URL must have the form of UUID (the `400` response is returned for invalid identifiers).
+* When there is no product with the given identifier, the `404` response is returned.
+* Product quantity cannot be less than 1, otherwise, the `400` response is returned.
 
 ### Modifying set of data
 
