@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
      * discounts and quantity based discounts. Product can be assigned to only one percentage based discount and multiple
      * quantity based discounts. Price can be decreased by applying one percentage based discount and one quantity
      * based discount. In case both types of discounts are assigned to the given product and quantity, their rates are summed up.
-     * In case of multiple quantity based discount with overlapping quantity thresholds, the one with higher discount rate
+     * In case of multiple associated quantity based discounts with overlapping quantity thresholds, the one with higher discount rate
      * is applied.
      *
      * @param productId given product identifier.
