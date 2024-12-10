@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * Custom implementation of AbstractAuthenticationToken. The object will allow to pass user details and JWT object
+ * Custom implementation of {@link AbstractAuthenticationToken}. The object will allow to pass user details and JWT object
  * to the request context.
  */
 public class AuthenticationTokenDTO extends AbstractAuthenticationToken {

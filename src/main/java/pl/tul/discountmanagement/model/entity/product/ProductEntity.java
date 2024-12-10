@@ -32,7 +32,7 @@ import java.util.UUID;
 import static pl.tul.discountmanagement.model.entity.discount.QuantityBasedDiscountEntity.PERCENTAGE_RATE;
 
 /**
- * The Entity class for the Product item.
+ * The Entity class for the product item.
  */
 @Getter
 @Setter
@@ -76,5 +76,6 @@ public class ProductEntity {
     )
     @OrderBy(PERCENTAGE_RATE)
     @Builder.Default
+    @Nullable
     private Set<QuantityBasedDiscountEntity> quantityBasedDiscounts = new LinkedHashSet<>();
 }

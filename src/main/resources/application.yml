@@ -10,13 +10,14 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     show-sql: true
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: validate
     properties:
       dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate:
         format_sql: true
   liquibase:
     change-log: classpath:database/schema/master.xml
+    contexts: main
   security:
     oauth2:
       resourceserver:

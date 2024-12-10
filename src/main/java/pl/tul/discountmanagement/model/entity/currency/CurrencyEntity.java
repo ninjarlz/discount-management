@@ -1,5 +1,6 @@
 package pl.tul.discountmanagement.model.entity.currency;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import java.util.UUID;
 import static pl.tul.discountmanagement.model.entity.product.ProductEntity.CURRENCY;
 
 /**
- * The Entity class for the Currency item.
+ * The Entity class for the currency item.
  */
 @Getter
 @Setter
@@ -45,5 +46,6 @@ public class CurrencyEntity {
 
     @OneToMany(mappedBy = CURRENCY)
     @Fetch(FetchMode.SUBSELECT)
+    @Nullable
     private Set<ProductEntity> products;
 }

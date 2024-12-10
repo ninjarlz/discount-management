@@ -23,6 +23,9 @@ import java.util.UUID;
 
 import static pl.tul.discountmanagement.model.entity.product.ProductEntity.QUANTITY_BASED_DISCOUNTS;
 
+/**
+ * The Entity class for the quantity based income item.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -53,5 +56,6 @@ public class QuantityBasedDiscountEntity {
     private int percentageRate;
 
     @ManyToMany(mappedBy = QUANTITY_BASED_DISCOUNTS)
+    @Nullable
     private Set<ProductEntity> products;
 }

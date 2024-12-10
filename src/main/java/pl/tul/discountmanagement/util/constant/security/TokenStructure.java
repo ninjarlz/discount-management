@@ -3,6 +3,9 @@ package pl.tul.discountmanagement.util.constant.security;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * Constant values related to the JWT token structure.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TokenStructure {
     public static final String BEARER_TOKEN_TYPE = "Bearer";

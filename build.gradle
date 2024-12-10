@@ -78,5 +78,13 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform {
 		includeEngines("junit-jupiter")
+		exclude '**/integration/**'
+	}
+}
+
+tasks.register('integrationTest', Test) {
+	useJUnitPlatform {
+		includeEngines("junit-jupiter")
+		exclude '**/unit/**'
 	}
 }

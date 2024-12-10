@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://db:5432/discount-management
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:16.4:///integration-test-db
     username: postgres
     password: postgres
   security:
@@ -9,11 +10,8 @@ spring:
         jwt:
           jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
           issuer-uri: http://127.0.0.1:8080
-
-dev-mode:
-  mock-auth-enabled: true
-  mock-auth-token-timeout-in-seconds: 3600
-  mock-auth-user-id: 11111111-1111-1111-1111-111111111111
+  liquibase:
+    contexts: main,integration-test
 
 logging:
   level:

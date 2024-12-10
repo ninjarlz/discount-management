@@ -12,9 +12,20 @@ import org.zalando.logbook.core.DefaultStrategy;
 import org.zalando.logbook.core.HeaderFilters;
 import org.zalando.logbook.json.JsonHttpLogFormatter;
 
+/**
+ * Configuration class for Logbook library.
+ */
 @Configuration
 @Slf4j
 public class LogbookConfig {
+    /**
+     * Return {@link Logbook} instance that logs incoming requests and produced responses.
+     * If log profile is set 'DEBUG' or 'TRACE', the logbook will log all the data.
+     * Otherwise, body responses are included only for erroneous responses, and requests do not contain authorization
+     * header values.
+     *
+     * @return {@link Logbook} instance that logs incoming requests and produced responses.
+     */
     @Bean
     public Logbook logbook() {
         Strategy strategy = new BodyOnlyIfStatusAtLeastStrategy(HttpStatus.BAD_REQUEST.value());

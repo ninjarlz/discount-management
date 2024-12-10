@@ -10,6 +10,9 @@ import pl.tul.discountmanagement.model.entity.discount.QuantityBasedDiscountEnti
 import pl.tul.discountmanagement.model.response.rest.discount.PercentageBasedDiscountResponseV1;
 import pl.tul.discountmanagement.model.response.rest.discount.QuantityBasedDiscountResponseV1;
 
+/**
+ * Class responsible for mapping instances containing quantity data.
+ */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DiscountMapper {
     PercentageBasedDiscountDTO percentageBasedDiscountEntityToDTO(PercentageBasedDiscountEntity percentageBasedDiscountEntity);
