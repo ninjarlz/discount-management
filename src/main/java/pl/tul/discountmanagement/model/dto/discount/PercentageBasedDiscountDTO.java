@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
 /**
- * The DTO class for percentage based discount data.
+ * The DTO class for percentage-based discount data.
  */
 @AllArgsConstructor
 @NoArgsConstructor

@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
 /**
- * The response model representing percentage based discount data.
+ * The response model representing percentage-based discount data.
  * API V1
  */
 @SuperBuilder

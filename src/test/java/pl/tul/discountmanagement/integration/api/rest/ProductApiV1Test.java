@@ -217,8 +217,8 @@ class ProductApiV1Test {
 
     /**
      * Test purpose         - Verify if GET /v1/product/{productId}/price?productQuantity={productQuantity} endpoint
-     *                        returns {@link ProductPriceResponseV1} with proper data and only percentage
-     *                        based discount applied when product quantity is not high enough.
+     *                        returns {@link ProductPriceResponseV1} with proper data and only percentage-based discount
+     *                        applied when product quantity is not high enough.
      * Test data            - product quantity, endpoint url.
      * Test expected result - An instance of {@link ProductPriceResponseV1} with proper data is returned.
      * Test type            - Positive.
@@ -254,7 +254,7 @@ class ProductApiV1Test {
 
     /**
      * Test purpose         - Verify if GET /v1/product/{productId}/price?productQuantity={productQuantity} endpoint
-     *                        returns {@link ProductPriceResponseV1} with proper data and quantity based discount with
+     *                        returns {@link ProductPriceResponseV1} with proper data and quantity-based discount with
      *                        higher percentage rate applied.
      * Test data            - product quantity, endpoint url.
      * Test expected result - An instance of {@link ProductPriceResponseV1} with proper data is returned.

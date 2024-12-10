@@ -24,7 +24,7 @@ import java.util.UUID;
 import static pl.tul.discountmanagement.model.entity.product.ProductEntity.QUANTITY_BASED_DISCOUNTS;
 
 /**
- * The Entity class for the quantity based income item.
+ * The Entity class for the quantity-based discount item.
  */
 @Getter
 @Setter

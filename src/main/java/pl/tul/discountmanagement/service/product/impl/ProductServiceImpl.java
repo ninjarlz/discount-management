@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
     private static final String PRODUCT_QUANTITY_ERROR_MSG = "Product quantity must be greater than 0.";
     private static final String MATCHING_PERCENTAGE_BASED_DISCOUNT_MSG = "Found matching percentage based discount for product with id '{}' with rate of '{}'%.";
     private static final String MATCHING_QUANTITY_BASED_DISCOUNT_MSG = "Found matching quantity based discount for product with id '{}' with rate of '{}'%.";
-    private static final String DISCOUNTS_SUM_MORE_THAN_100_PERCENT_MSG = "Product discounts sum to more than 100%, returning price of zero.";
+    private static final String DISCOUNTS_SUM_EQUALS_TO_OR_MORE_THAN_100_PERCENT_MSG = "Product discounts sum to equals to or more than 100%, returning price of zero.";
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
@@ -59,12 +59,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     /**
-     * Calculates a price for given product identifier and product quantity. Applies all associated percentage based
-     * discounts and quantity based discounts. Product can be assigned to only one percentage based discount and multiple
-     * quantity based discounts. Price can be decreased by applying one percentage based discount and one quantity
-     * based discount. In case both types of discounts are assigned to the given product and quantity, their rates are summed up.
-     * In case of multiple quantity based discount with overlapping quantity thresholds, the one with higher discount rate
-     * is applied.
+     * Calculates a price for a given product identifier and product quantity. Applies all associated percentage-based
+     * discounts and quantity-based discounts. A product can be assigned to only one percentage-based discount and multiple
+     * quantity-based discounts. Price can be decreased by applying one percentage-based discount and one quantity-based discount.
+     * In case both types of discounts are assigned to the given product and quantity, their rates are summed up.
+     * In case of multiple associated quantity-based discounts with overlapping quantity thresholds,
+     * the one with a higher discount rate is applied.
      *
      * @param productId given product identifier.
      * @param productQuantity given product quantity.
@@ -122,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
     private BigDecimal calculateDiscountedTotalPrice(ProductEntity productEntity, int productQuantity, int discountRate) {
         CurrencyEntity currencyEntity = productEntity.getCurrency();
         if (discountRate >= ONE_HUNDRED) {
-            log.info(DISCOUNTS_SUM_MORE_THAN_100_PERCENT_MSG);
+            log.info(DISCOUNTS_SUM_EQUALS_TO_OR_MORE_THAN_100_PERCENT_MSG);
             return BigDecimal.ZERO.setScale(currencyEntity.getFractionDigits(), RoundingMode.HALF_UP);
         }
         BigDecimal discount = productEntity.getPrice()
