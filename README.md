@@ -114,9 +114,9 @@ operate without a need for database recreation, but the application container sh
 
 The last option is to directly connect to the running database instance and manually insert/update a given set of data using the following properties
 defined for the `dev` profile:
-* address: localhost:5432
-* username: postgres
-* password: postgres
+* address: `localhost:5432`
+* username: `postgres`
+* password: `postgres`
 
 ### Authentication
 
