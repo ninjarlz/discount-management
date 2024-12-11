@@ -101,17 +101,26 @@ $ ./gradlew integrationTest
 Database schema is defined in the [liquibase script](src/main/resources/database/schema/master.xml). Apart from the database
 structure, it provides a set of exemplary data meant to be used for testing purposes. To change the discounts configuration, one
 can manually modify the following changeset - [exemplary_data.xml](src/main/resources/database/schema/changesets/1_0/exemplary_data.xml).
-Please, note that in such case, one should recreate the containerized database instance via the following commands:
+Please, note that in such case, one should rebuild the application and recreate the containerized database instance via the following commands:
 ```
 $ ./docker compose down
+$ ./docker compose build web
 $ ./docker compose up
 ```
 Otherwise, the given changelog will be not executed on the database, resulting in changelog checksum conflict and application crash.
 
 Another possibility is to add a new liquibase changeset with data insertion/update. In such case the solution will still properly
-operate without a need for database recreation.
+operate without a need for database recreation, but the application container should be rebuilt.
 
-The last option is to connect to the database instance and manually insert/update a given set of data.
+The last option is to directly connect to the running database instance and manually insert/update a given set of data using the following properties
+defined in the `dev` profile:
+```
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/discount-management
+    username: postgres
+    password: postgres
+```
 
 ### Authentication
 
