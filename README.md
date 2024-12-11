@@ -109,18 +109,14 @@ $ ./docker compose up
 ```
 Otherwise, the given changelog will be not executed on the database, resulting in changelog checksum conflict and application crash.
 
-Another possibility is to add a new liquibase changeset with data insertion/update. In such case the solution will still properly
+Another possibility is to add a new liquibase changeset with own data insertion/update. In such case the solution will still properly
 operate without a need for database recreation, but the application container should be rebuilt.
 
 The last option is to directly connect to the running database instance and manually insert/update a given set of data using the following properties
-defined in the `dev` profile:
-```
-spring:
-  datasource:
-    url: jdbc:postgresql://db:5432/discount-management
-    username: postgres
-    password: postgres
-```
+defined for the `dev` profile:
+* address: localhost:5432
+* username: postgres
+* password: postgres
 
 ### Authentication
 
@@ -137,7 +133,7 @@ dev-mode:
 
 ### Getting product details
 
-Return product details for a given product identifier. The product identifier in the URL has the form of UUID.
+Returns product details for a given product identifier. The product identifier in the URL has the form of UUID.
 
 To fetch the product details, one has to access the following endpoint:
 
