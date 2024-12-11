@@ -171,7 +171,7 @@ The endpoint requires a valid JWT token with `READ_PRICE` scope - check [here](#
 API behaviour:
 * Product identifier in the URL must have the form of UUID (the `400` response is returned for invalid identifiers).
 * When there is no product with the given identifier, the `404` response is returned.
-* Product quantity cannot be less than 1, otherwise, the `400` response is returned.
+* Product quantity parameter is required and cannot be less than 1, otherwise, the `400` response is returned.
 
 ### Modifying set of data
 
