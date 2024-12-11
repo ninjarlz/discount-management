@@ -108,6 +108,11 @@ $ ./docker compose up
 ```
 Otherwise, the given changelog will be not executed on the database, resulting in changelog checksum conflict and application crash.
 
+Another possibility is to add a new liquibase changeset with data insertion/update. In such case the solution will still properly
+operate without a need for database recreation.
+
+The last option is to connect to the database instance and manually insert/update a given set of data.
+
 ### Authentication
 
 Contains configuration for `dev` profile that exposes mocked OAuth2 JWT token endpoints. 
