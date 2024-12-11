@@ -133,7 +133,7 @@ dev-mode:
 
 ### Getting product details
 
-Return product details for a given product identifier. The product identifier in the URL has the form of UUID.
+Returns product details for a given product identifier. The product identifier in the URL has the form of UUID.
 
 To fetch the product details, one has to access the following endpoint:
 
