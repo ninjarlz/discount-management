@@ -71,15 +71,15 @@ public class AuthenticationTokenConverter implements Converter<Jwt, Authenticati
             log.error(USER_ID_CLAIM_IS_EMPTY);
             throw new InvalidBearerTokenException(USER_ID_CLAIM_IS_EMPTY);
         }
-        UUID paredUserId;
+        UUID parsedUserId;
         try {
-            paredUserId = UUID.fromString(userId);
+            parsedUserId = UUID.fromString(userId);
         } catch (IllegalArgumentException e) {
             log.error(USER_ID_CLAIM_IMPROPER_FORMAT);
             throw new InvalidBearerTokenException(USER_ID_CLAIM_IMPROPER_FORMAT);
         }
         return UserDetailsDTO.builder()
-                .userId(paredUserId)
+                .userId(parsedUserId)
                 .email(email)
                 .username(username)
                 .build();
