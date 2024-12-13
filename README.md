@@ -107,7 +107,7 @@ $ ./docker compose down
 $ ./docker compose build web
 $ ./docker compose up
 ```
-Otherwise, the given changelog will be not executed on the database, resulting in changelog checksum conflict and application crash.
+Otherwise, the given changeset will not be executed on the database, resulting in changeset checksum conflict and application crash.
 
 Another possibility is to add a new liquibase changeset with own data insertion/update. In such case the solution will still properly
 operate without a need for database recreation, but the application container should be rebuilt.
