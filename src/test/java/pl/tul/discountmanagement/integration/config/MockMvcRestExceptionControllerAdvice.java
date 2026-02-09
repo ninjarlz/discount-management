@@ -11,11 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.tul.discountmanagement.exception.product.ProductNotFoundException;
+import pl.tul.discountmanagement.product.domain.exception.ProductNotFoundException;
 
 import java.util.Map;
 
-import static pl.tul.discountmanagement.util.constant.config.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
+import static pl.tul.discountmanagement.shared.infrastructure.constant.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
 
 /**
  * This advice is necessary because {@link MockMvc} is not a real servlet environment,

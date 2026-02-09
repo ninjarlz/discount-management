@@ -1,10 +1,10 @@
 package pl.tul.discountmanagement.unit.util;
 
 import jakarta.annotation.Nullable;
-import pl.tul.discountmanagement.model.entity.currency.CurrencyEntity;
-import pl.tul.discountmanagement.model.entity.discount.PercentageBasedDiscountEntity;
-import pl.tul.discountmanagement.model.entity.discount.QuantityBasedDiscountEntity;
-import pl.tul.discountmanagement.model.entity.product.ProductEntity;
+import pl.tul.discountmanagement.product.domain.model.Currency;
+import pl.tul.discountmanagement.product.domain.model.PercentageBasedDiscount;
+import pl.tul.discountmanagement.product.domain.model.Product;
+import pl.tul.discountmanagement.product.domain.model.QuantityBasedDiscount;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -15,24 +15,24 @@ import java.util.UUID;
  */
 public class TestDataUtils {
 
-    public static CurrencyEntity buildCurrencyEntity(String currencyCode, int fractionDigits) {
-        return CurrencyEntity.builder()
+    public static Currency buildCurrency(String currencyCode, int fractionDigits) {
+        return Currency.builder()
                 .id(UUID.randomUUID())
                 .currencyCode(currencyCode)
                 .fractionDigits(fractionDigits)
                 .build();
     }
 
-    public static PercentageBasedDiscountEntity buildPercentageBasedDiscountEntity(int percentageRate) {
-        return PercentageBasedDiscountEntity.builder()
+    public static PercentageBasedDiscount buildPercentageBasedDiscount(int percentageRate) {
+        return PercentageBasedDiscount.builder()
                 .id(UUID.randomUUID())
                 .percentageRate(percentageRate)
                 .build();
     }
 
-    public static QuantityBasedDiscountEntity buildQuantityBasedDiscountEntity(int percentageRate, int lowerItemThreshold,
+    public static QuantityBasedDiscount buildQuantityBasedDiscount(int percentageRate, int lowerItemThreshold,
                                                                          @Nullable Integer upperItemThreshold) {
-        return QuantityBasedDiscountEntity.builder()
+        return QuantityBasedDiscount.builder()
                 .id(UUID.randomUUID())
                 .percentageRate(percentageRate)
                 .lowerItemsThreshold(lowerItemThreshold)
@@ -40,10 +40,10 @@ public class TestDataUtils {
                 .build();
     }
 
-    public static ProductEntity buildProductEntity(UUID productId, BigDecimal productPrice, CurrencyEntity currency,
-                                             @Nullable PercentageBasedDiscountEntity percentageBasedDiscount,
-                                             Set<QuantityBasedDiscountEntity> quantityBasedDiscounts) {
-        return ProductEntity.builder()
+    public static Product buildProduct(UUID productId, BigDecimal productPrice, Currency currency,
+                                             @Nullable PercentageBasedDiscount percentageBasedDiscount,
+                                             Set<QuantityBasedDiscount> quantityBasedDiscounts) {
+        return Product.builder()
                 .id(productId)
                 .name("NAME")
                 .description("DESCRIPTION")

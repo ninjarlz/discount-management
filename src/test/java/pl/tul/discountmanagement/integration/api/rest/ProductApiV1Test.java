@@ -12,8 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import pl.tul.discountmanagement.model.response.rest.product.ProductPriceResponseV1;
-import pl.tul.discountmanagement.model.response.rest.product.ProductResponseV1;
+import pl.tul.discountmanagement.product.infrastructure.adapter.in.rest.response.ProductPriceResponseV1;
+import pl.tul.discountmanagement.product.infrastructure.adapter.in.rest.response.ProductResponseV1;
 
 import java.util.Map;
 import java.util.UUID;
@@ -31,12 +31,12 @@ import static pl.tul.discountmanagement.util.constant.TestConstants.PRODUCT_ID;
 import static pl.tul.discountmanagement.util.constant.TestConstants.PRODUCT_NOT_FOUND_RESPONSE_MSG;
 import static pl.tul.discountmanagement.util.constant.TestConstants.QUANTITY_BASED_DISCOUNT_ID_1;
 import static pl.tul.discountmanagement.util.constant.TestConstants.QUANTITY_BASED_DISCOUNT_ID_2;
-import static pl.tul.discountmanagement.util.constant.config.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
-import static pl.tul.discountmanagement.util.constant.rest.ApiUrls.PRICE_PATH_URL;
-import static pl.tul.discountmanagement.util.constant.rest.ApiUrls.PRODUCT_ENDPOINT_V1;
-import static pl.tul.discountmanagement.util.constant.rest.ApiUrls.PRODUCT_QUANTITY_REQUEST_PARAMETER;
-import static pl.tul.discountmanagement.util.constant.security.Permissions.READ_PRICE_PERMISSION;
-import static pl.tul.discountmanagement.util.constant.security.Permissions.READ_PRODUCT_PERMISSION;
+import static pl.tul.discountmanagement.shared.infrastructure.constant.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
+import static pl.tul.discountmanagement.product.infrastructure.adapter.in.rest.constant.ApiUrls.PRICE_PATH_URL;
+import static pl.tul.discountmanagement.product.infrastructure.adapter.in.rest.constant.ApiUrls.PRODUCT_ENDPOINT_V1;
+import static pl.tul.discountmanagement.product.infrastructure.adapter.in.rest.constant.ApiUrls.PRODUCT_QUANTITY_REQUEST_PARAMETER;
+import static pl.tul.discountmanagement.shared.infrastructure.security.constant.Permissions.READ_PRICE_PERMISSION;
+import static pl.tul.discountmanagement.shared.infrastructure.security.constant.Permissions.READ_PRODUCT_PERMISSION;
 
 /**
  * Test class for product API V1.

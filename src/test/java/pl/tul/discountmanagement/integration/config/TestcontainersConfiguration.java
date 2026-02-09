@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-import static pl.tul.discountmanagement.util.constant.config.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
+import static pl.tul.discountmanagement.shared.infrastructure.constant.ApplicationProfiles.INTEGRATION_TEST_PROFILE;
 
 /**
  * Configuration class for containerized instance of PostgreSQL database.
