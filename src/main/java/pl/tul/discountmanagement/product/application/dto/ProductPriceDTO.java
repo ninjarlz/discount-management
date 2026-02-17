@@ -2,8 +2,8 @@ package pl.tul.discountmanagement.product.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -12,16 +12,17 @@ import java.util.UUID;
 /**
  * The DTO class for product price data.
  */
+@Getter
+@EqualsAndHashCode
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-@Data
 public class ProductPriceDTO {
-    private UUID productId;
-    private int productQuantity;
-    private BigDecimal totalPrice;
-    private BigDecimal itemPrice;
-    private BigDecimal baseItemPrice;
-    private String currency;
-    private Set<PercentageBasedDiscountDTO> appliedDiscounts;
+
+    private final UUID productId;
+    private final int productQuantity;
+    private final BigDecimal totalPrice;
+    private final BigDecimal itemPrice;
+    private final BigDecimal baseItemPrice;
+    private final String currency;
+    private final Set<PercentageBasedDiscountDTO> appliedDiscounts;
 }

@@ -63,8 +63,8 @@ public abstract class ProductDTOMapper {
             return null;
         }
         return PercentageBasedDiscountDTO.builder()
-                .id(discount.id())
-                .percentageRate(discount.percentageRate())
+                .id(discount.getId())
+                .percentageRate(discount.getPercentageRate())
                 .build();
     }
 
@@ -73,10 +73,10 @@ public abstract class ProductDTOMapper {
             return null;
         }
         return QuantityBasedDiscountDTO.builder()
-                .id(discount.id())
-                .percentageRate(discount.percentageRate())
-                .lowerItemsThreshold(discount.lowerItemsThreshold())
-                .upperItemsThreshold(discount.upperItemsThreshold())
+                .id(discount.getId())
+                .percentageRate(discount.getPercentageRate())
+                .lowerItemsThreshold(discount.getLowerItemsThreshold())
+                .upperItemsThreshold(discount.getUpperItemsThreshold())
                 .build();
     }
 
