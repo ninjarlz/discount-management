@@ -66,13 +66,13 @@ public class ProductApplicationService implements GetProductUseCase, CalculatePr
         int discountRate = 0;
         var percentageBasedDiscount = product.percentageBasedDiscount();
         if (nonNull(percentageBasedDiscount)) {
-            log.info(MATCHING_PERCENTAGE_BASED_DISCOUNT_MSG, productId, percentageBasedDiscount.percentageRate());
-            discountRate += percentageBasedDiscount.percentageRate();
+            log.info(MATCHING_PERCENTAGE_BASED_DISCOUNT_MSG, productId, percentageBasedDiscount.getPercentageRate());
+            discountRate += percentageBasedDiscount.getPercentageRate();
         }
         QuantityBasedDiscount matchingQuantityBasedDiscount = getMatchingQuantityBasedDiscount(product, productQuantity);
         if (nonNull(matchingQuantityBasedDiscount)) {
-            log.info(MATCHING_QUANTITY_BASED_DISCOUNT_MSG, productId, matchingQuantityBasedDiscount.percentageRate());
-            discountRate += matchingQuantityBasedDiscount.percentageRate();
+            log.info(MATCHING_QUANTITY_BASED_DISCOUNT_MSG, productId, matchingQuantityBasedDiscount.getPercentageRate());
+            discountRate += matchingQuantityBasedDiscount.getPercentageRate();
         }
         BigDecimal totalPrice = calculateDiscountedTotalPrice(product, productQuantity, discountRate);
         int fractionDigits = product.currency().fractionDigits();
@@ -101,9 +101,9 @@ public class ProductApplicationService implements GetProductUseCase, CalculatePr
         }
         return product.quantityBasedDiscounts()
                 .stream()
-                .filter(quantityBasedDiscount -> quantityBasedDiscount.lowerItemsThreshold() <= productQuantity &&
-                        (isNull(quantityBasedDiscount.upperItemsThreshold()) || quantityBasedDiscount.upperItemsThreshold() >= productQuantity))
-                .max(Comparator.comparingInt(QuantityBasedDiscount::percentageRate))
+                .filter(quantityBasedDiscount -> quantityBasedDiscount.getLowerItemsThreshold() <= productQuantity &&
+                        (isNull(quantityBasedDiscount.getUpperItemsThreshold()) || quantityBasedDiscount.getUpperItemsThreshold() >= productQuantity))
+                .max(Comparator.comparingInt(QuantityBasedDiscount::getPercentageRate))
                 .orElse(null);
     }
 

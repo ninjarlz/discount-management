@@ -1,22 +1,28 @@
 package pl.tul.discountmanagement.product.application.dto;
 
 import jakarta.annotation.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+
+import java.util.UUID;
 
 /**
  * The DTO class for quantity-based discount data.
  */
+@Getter
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @SuperBuilder
-@Data
 public class QuantityBasedDiscountDTO extends PercentageBasedDiscountDTO {
-    private int lowerItemsThreshold;
+
+    private final int lowerItemsThreshold;
     @Nullable
-    private Integer upperItemsThreshold;
+    private final Integer upperItemsThreshold;
+
+    public QuantityBasedDiscountDTO(UUID id, int percentageRate, int lowerItemsThreshold,
+                                     @Nullable Integer upperItemsThreshold) {
+        super(id, percentageRate);
+        this.lowerItemsThreshold = lowerItemsThreshold;
+        this.upperItemsThreshold = upperItemsThreshold;
+    }
 }
